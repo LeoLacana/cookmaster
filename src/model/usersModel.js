@@ -17,7 +17,14 @@ const getUsers = async () => {
     return users;
 };
 
+const getUser = async (name) => {
+    const db = await connection();
+    const user = await db.collection('users').find({ name }).toArray();
+    return user;
+};
+
 module.exports = {
     registerUsers,
     getUsers,
+    getUser,
 };
