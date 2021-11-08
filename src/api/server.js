@@ -4,7 +4,7 @@ const validateJWT = require('./auth/validateJWT');
 
 const {
   registerUsers,
-  getToken } = require('../controller/usersController');
+  generateToken } = require('../controller/usersController');
 
 const {
   registerRecipe,
@@ -34,13 +34,13 @@ app.post('/login',
   validationEmail,
   validationPassword,
   loginValidation,
-  getToken);
+  generateToken);
 
 app.post('/recipes',
+  validateJWT,
   validationName,
   validationIngredients,
   validationPreparation,
-  validateJWT,
   registerRecipe);
 
 app.get('/recipes',

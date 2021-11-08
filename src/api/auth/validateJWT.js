@@ -1,17 +1,15 @@
 const jwt = require('jsonwebtoken');
 const model = require('../../model/usersModel');
 
+const secret = 'turma11';
+
 const jwtConfig = {
-  expiresIn: '7d',
+  expiresIn: '1d',
   algorithm: 'HS256',
 };
 
-const secret = 'secretdesafioebytr';
-
 module.exports = async (req, res, next) => {
   const token = req.headers.authorization;
-
-  console.log(token);
 
   if (!token) {
     return res.status(401).json({ error: 'Token não encontrado' });

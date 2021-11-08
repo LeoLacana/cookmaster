@@ -44,7 +44,6 @@ const loginValidation = async (req, res, next) => {
   const { email, password } = req.body;
   const users = await showUsers();
   const emailExist = users.find((user) => user.email === email);
-  console.log(emailExist);
   if (!emailExist || emailExist.password !== password) {
     return res.status(401).json({ message: 'Incorrect username or password' });
   }

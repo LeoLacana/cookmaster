@@ -1,10 +1,11 @@
 const { setRecipe, showRecipes } = require('../service/recipesService');
 
-const registerRecipe = (req, res) => {
-  const { _id } = req.user;
+const registerRecipe = async (req, res) => {
+  const { _id } = req.user[0];
   const { name, ingredients, preparation } = req.body;
+  console.log(_id);
 
-  const recipeInserted = setRecipe(name, ingredients, preparation, _id);
+  const recipeInserted = await setRecipe(name, ingredients, preparation, _id);
   const recipe = {
     name,
     ingredients,

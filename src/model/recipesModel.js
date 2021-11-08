@@ -14,7 +14,6 @@ async function registerRecipe(name, ingredients, preparation, _id) {
 async function getRecipes() {
     const db = await connection();
     const recipes = await db.collection('recipes').find().toArray();
-    console.log(recipes);
     return recipes;
 }
 
