@@ -20,7 +20,6 @@ async function getUsers() {
 async function getUser(name) {
     const db = await connection();
     const user = await db.collection('users').findOne({ name });
-    console.log(user);
     return user;
 }
 

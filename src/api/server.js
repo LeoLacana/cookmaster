@@ -8,7 +8,8 @@ const {
 
 const {
   registerRecipe,
-  getRecipes } = require('../controller/recipesController');
+  getRecipes,
+  getRecipesById } = require('../controller/recipesController');
 
 const {
   validationName,
@@ -19,7 +20,8 @@ const {
 
 const {
   validationIngredients,
-  validationPreparation } = require('../middleware/recipesMiddleware');
+  validationPreparation,
+  validationRecipeById } = require('../middleware/recipesMiddleware');
 
 const PORT = 3000;
 
@@ -45,6 +47,10 @@ app.post('/recipes',
 
 app.get('/recipes',
   getRecipes);
+
+app.get('/recipes/:id',
+  validationRecipeById,
+  getRecipesById);
 
 app.listen(PORT, () => {
   console.log(`Ouvindo a porta ${PORT}`);
