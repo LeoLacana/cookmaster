@@ -4,7 +4,7 @@ const model = require('../../model/usersModel');
 const secret = 'turma11';
 
 const jwtConfig = {
-  expiresIn: '1d',
+  expiresIn: '7d',
   algorithm: 'HS256',
 };
 

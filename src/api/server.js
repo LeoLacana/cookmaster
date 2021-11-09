@@ -1,13 +1,13 @@
 const app = require('./app');
 
-const validateJWT = require('./auth/validateJWT');
+// const validateJWT = require('./auth/validateJWT');
 
 const {
   registerUsers,
   generateToken } = require('../controller/usersController');
 
 const {
-  registerRecipe,
+  // registerRecipe,
   getRecipes } = require('../controller/recipesController');
 
 const {
@@ -17,9 +17,9 @@ const {
   validationEmailExist,
   loginValidation } = require('../middleware/usersMiddleware');
 
-const {
-  validationIngredients,
-  validationPreparation } = require('../middleware/recipesMiddleware');
+// const {
+//   validationIngredients,
+//   validationPreparation } = require('../middleware/recipesMiddleware');
 
 const PORT = 3000;
 
@@ -36,12 +36,12 @@ app.post('/login',
   loginValidation,
   generateToken);
 
-app.post('/recipes',
-  validateJWT,
-  validationName,
-  validationIngredients,
-  validationPreparation,
-  registerRecipe);
+// app.post('/recipes',
+// validationName,
+// validationIngredients,
+// validationPreparation,
+// validateJWT,
+//   registerRecipe);
 
 app.get('/recipes',
   getRecipes);
