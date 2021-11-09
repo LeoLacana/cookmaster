@@ -4,7 +4,7 @@ const model = require('../../model/usersModel');
 const secret = 'turma11';
 
 const jwtConfig = {
-  expiresIn: '7d',
+  expiresIn: '1d',
   algorithm: 'HS256',
 };
 
@@ -17,7 +17,6 @@ module.exports = async (req, res, next) => {
 
   try {
     const decode = jwt.verify(token, secret, jwtConfig);
-    // console.log(decode);
 
     const user = await model.getUser(decode.data.name);
 
