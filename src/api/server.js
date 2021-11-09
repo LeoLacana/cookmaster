@@ -24,11 +24,11 @@ const {
 const PORT = 3000;
 
 app.post('/users',
-validationName,
-validationPassword,
-validationEmail,
-validationEmailExist,
-registerUsers);
+  validationName,
+  validationPassword,
+  validationEmail,
+  validationEmailExist,
+  registerUsers);
 
 app.post('/login',
   validationEmail,
@@ -37,10 +37,10 @@ app.post('/login',
   generateToken);
 
 app.post('/recipes',
-validationName,
-validationIngredients,
-validationPreparation,
-validateJWT,
+  validationName,
+  validationIngredients,
+  validationPreparation,
+  validateJWT,
   registerRecipe);
 
 app.get('/recipes',

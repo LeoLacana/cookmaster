@@ -25,7 +25,6 @@ const generateToken = async (req, res) => {
 
   const { _id, name, role } = user;
   const newUserData = { _id, name, email, role };
-  console.log(_id, name, email, role);
 
   const token = jwt.sign({ data: newUserData }, secret, jwtConfig);
   return res.status(200).json({ token });
