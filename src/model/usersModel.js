@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const registerUsers = async (name, email, password, role) => {
+async function registerUsers(name, email, password, role) {
     const db = await connection();
     const user = await db.collection('users').insertOne({ name, email, password, role });
     return {
@@ -9,19 +9,20 @@ const registerUsers = async (name, email, password, role) => {
         role,
         _id: user.insertedId,
     };
-};
+}
 
-const getUsers = async () => {
+async function getUsers() {
     const db = await connection();
     const users = await db.collection('users').find().toArray();
     return users;
-};
+}
 
-const getUser = async (name) => {
+async function getUser(name) {
     const db = await connection();
-    const user = await db.collection('users').find({ name }).toArray();
+    const user = await db.collection('users').findOne({ name });
+    console.log(user);
     return user;
-};
+}
 
 module.exports = {
     registerUsers,

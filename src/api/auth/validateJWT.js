@@ -17,6 +17,7 @@ module.exports = async (req, res, next) => {
 
   try {
     const decode = jwt.verify(token, secret, jwtConfig);
+    // console.log(decode);
 
     const user = await model.getUser(decode.data.name);
 
