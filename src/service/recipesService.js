@@ -2,7 +2,8 @@ const {
   registerRecipe,
   getRecipes,
   getRecipesById,
-  updateRecipe } = require('../model/recipesModel');
+  updateRecipe,
+  deleteRecipe } = require('../model/recipesModel');
 
 const setRecipe = async (name, ingredients, preparation, _id) => {
   try {
@@ -32,9 +33,18 @@ const modifyRecipe = async (name, ingredients, preparation, id) => {
   return recipe;
 };
 
+const removeRecipe = async (id) => {
+  try {
+    await deleteRecipe(id);
+  } catch (err) {
+    return { message: 'Erro ao remover receita' };
+  }
+};
+
 module.exports = {
   setRecipe,
   showRecipes,
   showRecipeById,
   modifyRecipe,
+  removeRecipe,
 };

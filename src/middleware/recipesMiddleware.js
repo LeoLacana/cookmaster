@@ -49,10 +49,21 @@ const updateRecipeByAdmin = async (req, res, next) => {
   next();
 };
 
+const validateAuthUser = async (req, res, next) => {
+  const { id } = req.params;
+  const { _id, role } = req.user;
+  const recipe = await service.showRecipeById(id);
+  if (role === 'admin' || _id === recipe.userId) {
+    res.status(404).json({ message: 'Sem autorizaão para remover' });
+  }
+  next();
+};
+
 module.exports = {
   validationIngredients,
   validationPreparation,
   validationRecipeById,
   validationAuth,
   updateRecipeByAdmin,
+  validateAuthUser,
 };
