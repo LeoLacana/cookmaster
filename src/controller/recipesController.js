@@ -1,7 +1,8 @@
 const {
   setRecipe,
   showRecipes,
-  showRecipeById } = require('../service/recipesService');
+  showRecipeById,
+  modifyRecipe } = require('../service/recipesService');
 
 const registerRecipe = async (req, res) => {
   const { _id } = req.user;
@@ -30,8 +31,18 @@ const getRecipesById = async (req, res) => {
   return res.status(200).json(recipe);
 };
 
+const updateRecipe = async (req, res) => {
+  // const { _id } = req.user;
+  console.log(req.user);
+  const { id } = req.params;
+  const { name, ingredients, preparation } = req.body;
+  const recipe = await modifyRecipe(name, ingredients, preparation, id);
+  return res.status(200).json(recipe);
+};
+
 module.exports = {
   registerRecipe,
   getRecipes,
   getRecipesById,
+  updateRecipe,
 };

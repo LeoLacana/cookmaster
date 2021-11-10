@@ -9,7 +9,8 @@ const {
 const {
   registerRecipe,
   getRecipes,
-  getRecipesById } = require('../controller/recipesController');
+  getRecipesById,
+  updateRecipe } = require('../controller/recipesController');
 
 const {
   validationName,
@@ -21,7 +22,8 @@ const {
 const {
   validationIngredients,
   validationPreparation,
-  validationRecipeById } = require('../middleware/recipesMiddleware');
+  validationRecipeById,
+  validationAuth } = require('../middleware/recipesMiddleware');
 
 const PORT = 3000;
 
@@ -39,10 +41,10 @@ app.post('/login',
   generateToken);
 
 app.post('/recipes',
+  validateJWT,
   validationName,
   validationIngredients,
   validationPreparation,
-  validateJWT,
   registerRecipe);
 
 app.get('/recipes',
@@ -51,6 +53,11 @@ app.get('/recipes',
 app.get('/recipes/:id',
   validationRecipeById,
   getRecipesById);
+
+app.put('/recipes/:id',
+  validationAuth,
+  validateJWT,
+  updateRecipe);
 
 app.listen(PORT, () => {
   console.log(`Ouvindo a porta ${PORT}`);

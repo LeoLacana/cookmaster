@@ -1,7 +1,8 @@
 const {
   registerRecipe,
   getRecipes,
-  getRecipesById } = require('../model/recipesModel');
+  getRecipesById,
+  updateRecipe } = require('../model/recipesModel');
 
 const setRecipe = async (name, ingredients, preparation, _id) => {
   try {
@@ -26,8 +27,14 @@ const showRecipeById = async (id) => {
   return recipe;
 };
 
+const modifyRecipe = async (name, ingredients, preparation, id) => {
+  const recipe = await updateRecipe(name, ingredients, preparation, id);
+  return recipe;
+};
+
 module.exports = {
   setRecipe,
   showRecipes,
   showRecipeById,
+  modifyRecipe,
 };
