@@ -1,4 +1,16 @@
+const multer = require('multer');
 const app = require('./app');
+
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, 'src/uploads/');
+  },
+  filename: (req, file, callback) => {
+    callback(null, `${req.params.id}.jpeg`);
+  },
+});
+
+const upload = multer({ storage });
 
 const validateJWT = require('./auth/validateJWT');
 
@@ -11,7 +23,8 @@ const {
   getRecipes,
   getRecipesById,
   updateRecipe,
-  deleteRecipe } = require('../controller/recipesController');
+  deleteRecipe,
+  inserImageRecipe } = require('../controller/recipesController');
 
 const {
   validationName,
@@ -26,8 +39,6 @@ const {
   validationRecipeById,
   validationAuth,
    } = require('../middleware/recipesMiddleware');
-
-const PORT = 3000;
 
 app.post('/users',
   validationName,
@@ -66,6 +77,14 @@ app.delete('/recipes/:id',
   validateJWT,
   // validateAuthUser,
   deleteRecipe);
+
+app.put('/recipes/:id/image',
+  upload.single('image'),
+  validationAuth,
+  validateJWT,
+  inserImageRecipe);
+
+const PORT = 3000;
 
 app.listen(PORT, () => {
   console.log(`Ouvindo a porta ${PORT}`);

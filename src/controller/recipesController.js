@@ -3,7 +3,8 @@ const {
   showRecipes,
   showRecipeById,
   modifyRecipe,
-  removeRecipe } = require('../service/recipesService');
+  removeRecipe,
+  setImageRecipe } = require('../service/recipesService');
 
 const registerRecipe = async (req, res) => {
   const { _id } = req.user;
@@ -28,6 +29,7 @@ const getRecipes = async (req, res) => {
 
 const getRecipesById = async (req, res) => {
   const { id } = req.params;
+  // console.log(id);
   const recipe = await showRecipeById(id);
   return res.status(200).json(recipe);
 };
@@ -47,10 +49,20 @@ const deleteRecipe = async (req, res) => {
   return res.status(204).json();
 };
 
+const inserImageRecipe = async (req, res) => {
+  const { id } = req.params;
+  const infoUser = req.user;
+  const image = `localhost:3000/src/uploads/${id}.jpeg`;
+  // console.log(infoUser, id, image);
+  const recipeAfter = await setImageRecipe(id, infoUser, image);
+  return res.status(200).json(recipeAfter);
+};
+
 module.exports = {
   registerRecipe,
   getRecipes,
   getRecipesById,
   updateRecipe,
   deleteRecipe,
+  inserImageRecipe,
 };

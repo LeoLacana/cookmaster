@@ -50,10 +50,31 @@ async function deleteRecipe(id) {
   await db.collection('recipes').deleteOne(ObjectId(id));
 }
 
+async function insertImageRecipe(id, infoUser, image) {
+  const db = await connection();
+  const { _id, role } = infoUser;
+  const recipeBefore = await getRecipesById(id);
+  console.log(_id === recipeBefore.userId, role === 'admin');
+  if (_id.toString() === recipeBefore.userId.toString() || role === 'admin') {
+    await db.collection('recipes').updateOne(
+      { _id: ObjectId(id) },
+      {
+        $set: {
+          image,
+        },
+      },
+    );
+    const recipeAfter = await getRecipesById(id);
+    return recipeAfter;
+  }
+  return 'Opa';
+}
+
 module.exports = {
   registerRecipe,
   getRecipes,
   getRecipesById,
   updateRecipe,
   deleteRecipe,
+  insertImageRecipe,
 };

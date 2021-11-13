@@ -3,7 +3,8 @@ const {
   getRecipes,
   getRecipesById,
   updateRecipe,
-  deleteRecipe } = require('../model/recipesModel');
+  deleteRecipe,
+  insertImageRecipe } = require('../model/recipesModel');
 
 const setRecipe = async (name, ingredients, preparation, _id) => {
   try {
@@ -41,10 +42,20 @@ const removeRecipe = async (id) => {
   }
 };
 
+const setImageRecipe = async (id, infoUser, image) => {
+  try {
+    const recipeAfter = await insertImageRecipe(id, infoUser, image);
+    return recipeAfter;
+  } catch (err) {
+    return { message: 'Erro ao adicionar imagem' };
+  }
+};
+
 module.exports = {
   setRecipe,
   showRecipes,
   showRecipeById,
   modifyRecipe,
   removeRecipe,
+  setImageRecipe,
 };
