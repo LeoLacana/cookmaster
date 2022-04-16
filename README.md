@@ -27,3 +27,21 @@ Foi possível adicionar uma imagem à uma receita, utilizando o upload de arquiv
 - Salvar arquivos no servidor através de uma API REST;
 
 - Consultar arquivos do servidor através de uma api REST.
+
+# Como Rodar o Projeto
+  ```bash
+npm install
+npm run dev
+
+EndPoints
+
+http://localhost:3000/users
+
+http://localhost:3000/login
+
+http://localhost:3000/recipes
+
+http://localhost:3000/recipes:id
+
+http://localhost:3000/recipes:id/image
+```
